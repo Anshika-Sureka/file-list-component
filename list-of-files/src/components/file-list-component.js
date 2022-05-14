@@ -11,7 +11,7 @@ function FileListComponent(props){
             {name:'Status',key:'status'},
         ]
     }
-    const rowData = testData;
+    const rowData = testData.map(e => { e.selected = false; return e});
     return (
         <div>
         <SelectTableComponent column={columnList.column} rowData={rowData}/>
