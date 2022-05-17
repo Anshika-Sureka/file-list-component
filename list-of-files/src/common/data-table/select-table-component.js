@@ -1,5 +1,8 @@
 import { React, useState, useRef, useEffect } from "react";
 import TableRowComponent from "./table-row-component";
+import downloadIcon from "../../download.svg";
+
+require('./styles.scss');
 
 function SelectTableComponent(props) {
   const { column, rowData } = props;
@@ -18,7 +21,7 @@ function SelectTableComponent(props) {
     }
   }, [selectCount, rowData]);
 
-  const updateSelectAll = (row) => {
+  const updateSelect = (row) => {
     row.selected
       ? setSelectCount(selectCount + 1)
       : setSelectCount(selectCount - 1);
@@ -27,10 +30,8 @@ function SelectTableComponent(props) {
   const toggleSelectAll = (e) => {
     if (selectCount === rowData.length) {
       deSelectAllRows();
-      console.log("deSelectAllRows");
     } else if (selectCount < rowData.length) {
       selectAllRows();
-      console.log("selectAllRows");
     }
   };
 
@@ -48,11 +49,34 @@ function SelectTableComponent(props) {
     setSelectCount(rowData.length);
   };
 
+  const downloadSelected = () => {
+      let message = rowData.reduce((acc,cur) => {
+          if(cur.selected){
+             acc.push("\npath: "+cur.path+"\ndevice: "+cur.device);
+          }
+          return acc;
+      },[])
+      alert(message.join());
+      return;
+  }
+
+  const renderDownload = () => {
+    return (
+    <button
+        text="Download Selected"
+        onClick={downloadSelected}
+        className="format-download"
+    >
+        <img src={downloadIcon} alt="download" /> Download Selected
+    </button>
+    );
+  }
+
   const renderHeader = () => {
     return (
       <thead>
         <tr>
-          <td> </td>
+          <th> </th>
           {column.map((e, index) => (
             <th key={index}>{e.name}</th>
           ))}
@@ -70,7 +94,7 @@ function SelectTableComponent(props) {
               column={column}
               row={row}
               key={row.name}
-              updateSelectAll={updateSelectAll}
+              updateSelect={updateSelect}
             />
           );
         })}
@@ -79,8 +103,8 @@ function SelectTableComponent(props) {
   };
 
   return (
-    <div>
-      <div className="">
+    <div className="file-table-container">
+      <div className="file-table-header">
         <span>
           <input
             type="checkbox"
@@ -92,8 +116,8 @@ function SelectTableComponent(props) {
             ref={selectAllRef}
           />
         </span>
-        <span></span>
-        <span></span>
+         <span>{selectCount? `Selected ${selectCount}`:`None Selected`}</span>
+       <span>{renderDownload()}</span>
       </div>
       <div className="">
         <table>

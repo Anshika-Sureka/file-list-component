@@ -1,5 +1,4 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 import FileListComponent from './components/file-list-component';
 
 function App() {

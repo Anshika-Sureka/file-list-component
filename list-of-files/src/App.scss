@@ -1,0 +1,22 @@
+@import './global-styles/variables.scss';
+.app {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: stretch;
+  font-family: sans-serif;
+  font-size: 16px;
+}
+
+.app-header {
+  background-color: lightGrey;
+  min-height: 5vh;
+  color: black;
+}
+.app-container {
+  background-color: lightGrey;
+  min-height: 95vh;
+  color: black;
+}
+
