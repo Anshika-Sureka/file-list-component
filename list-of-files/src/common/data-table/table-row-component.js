@@ -8,12 +8,12 @@ function TableRowComponent(props) {
     updateSelect(row);
   };
 
-  const disableCheckbox = (status) => {
+/*   const disableCheckbox = (status) => {
     if (status !== "available") {
       return true;
     }
     return false;
-  };
+  }; */
 
   const getSelectedClasses = (row) => {
     return row.selected ? "selected" : "";
@@ -28,7 +28,7 @@ function TableRowComponent(props) {
             name={row.name}
             checked={row.selected}
             onChange={(e) => toggleCheckbox(e)}
-            disabled={disableCheckbox(row.status)}
+            /* disabled={disableCheckbox(row.status)} */
           />
         </label>
       </td>

@@ -51,7 +51,7 @@ function SelectTableComponent(props) {
 
   const downloadSelected = () => {
       let message = rowData.reduce((acc,cur) => {
-          if(cur.selected){
+          if(cur.selected && cur.status === 'available'){
              acc.push("\npath: "+cur.path+"\ndevice: "+cur.device);
           }
           return acc;
